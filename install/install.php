@@ -22,6 +22,6 @@ $runner = new MyRunner(DB::Link([
     'dbname' => Config::MYSQL_DATABASE
 ]));
 
-foreach (explode(";", file_get_contents('feedbackform.sql')) as $value) {
+foreach (explode(";", file_get_contents('install/feedbackform.sql')) as $value) {
     $runner->runSQL($value . ";");
 }
