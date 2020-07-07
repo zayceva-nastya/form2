@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 01 2020 г., 14:11
--- Версия сервера: 10.3.22-MariaDB-log
--- Версия PHP: 7.4.4
+-- Время создания: Июл 07 2020 г., 21:22
+-- Версия сервера: 8.0.12
+-- Версия PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -20,7 +21,7 @@ SET time_zone = "+00:00";
 --
 -- База данных: `feedbackform`
 --
-CREATE DATABASE IF NOT EXISTS `feedbackform` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `feedbackform` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `feedbackform`;
 
 -- --------------------------------------------------------
@@ -31,19 +32,41 @@ USE `feedbackform`;
 
 CREATE TABLE `reviews` (
   `id` int(11) NOT NULL COMMENT '№',
-  `Name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Имя',
-  `Email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Электронная почта',
-  `Review` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Отзыв'
+  `Name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Имя',
+  `Email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Электронная почта',
+  `Review` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Отзыв'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `Login` varchar(100) NOT NULL,
+  `Password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `Login`, `Password`) VALUES
+(1, 'first', '123456789'),
+(2, 'second', '987654321'),
+(3, 'first', '123456789'),
+(4, 'second', '987654321');
 
 --
 -- Индексы сохранённых таблиц
 --
 
 --
--- Индексы таблицы `reviews`
+-- Индексы таблицы `users`
 --
-ALTER TABLE `reviews`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -51,10 +74,10 @@ ALTER TABLE `reviews`
 --
 
 --
--- AUTO_INCREMENT для таблицы `reviews`
+-- AUTO_INCREMENT для таблицы `users`
 --
-ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '№';
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

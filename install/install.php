@@ -4,6 +4,7 @@ require "vendor/autoload.php";
 
 use TexLab\MyDB\Runner;
 use TexLab\MyDB\DB;
+use core\Config;
 
 
 class MyRunner extends Runner
@@ -16,11 +17,11 @@ class MyRunner extends Runner
 }
 
 $runner = new MyRunner(DB::Link([
-    'host' => 'localhost',
-    'username' => 'root',
-    'password' => 'root',
+    'host' => Config::MYSQL_HOST,
+    'username' => Config::MYSQL_USER_NAME,
+    'dbname' => Config::MYSQL_DATABASE
 ]));
 
-foreach (explode(";", file_get_contents('install/feedbackform.sql')) as $value) {
+foreach (explode(";", file_get_contents('feedbackform.sql')) as $value) {
     $runner->runSQL($value . ";");
 }

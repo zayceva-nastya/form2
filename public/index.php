@@ -2,25 +2,11 @@
 include "../vendor/autoload.php";
 
 use Core\Config;
-use Core\Authorization;
+use Core\Login;
 use TexLab\MyDB\DB;
 use TexLab\MyDB\DbEntity;
 
-
-$table = new Authorization(
-  Config::MYSQL_TABLE,
-  DB::Link([
-    'host' => Config::MYSQL_HOST,
-    'username' => Config::MYSQL_USER_NAME,
-    'password' => Config::MYSQL_PASSWORD,
-    'dbname' => Config::MYSQL_DATABASE
-  ])
-);
-if(!empty($_POST))
-{
-  $table->getAuthorization($_POST);
-}
-
+(new Login())->userCheck2('first', '123456789');
 ?>
 <!doctype html>
 <html lang="en">
@@ -36,6 +22,7 @@ if(!empty($_POST))
 </head>
 
 <body class="">
+<?= !empty($_POST) && (new Login())->userCheck2($_POST['Login'], $_POST['Password']) ? 'Да' : 'Нет' ?>
   <form action="?" method="post" class="w-25 m-3">
     <div class="form-group">
       <label for="exampleInputEmail1">Login</label>
